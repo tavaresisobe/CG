@@ -7,8 +7,48 @@ float thetaX = 0.0;
 float thetaY = 0.0;
 
 void cubo() {
-  // Função cubo permanece a mesma
-  // ...
+  glColor3f(1.0, 0.0, 0.0);
+  glBegin(GL_POLYGON);
+  glVertex3f(-0.25, 0.25, 0.25);
+  glVertex3f(0.25, 0.25, 0.25);
+  glVertex3f(0.25, -0.25, 0.25);
+  glVertex3f(-0.25, -0.25, 0.25);
+  glEnd();
+  glColor3f(0.0, 1.0, 0.0);
+  glBegin(GL_POLYGON);
+  glVertex3f(-0.25, 0.25, -0.25);
+  glVertex3f(0.25, 0.25, -0.25);
+  glVertex3f(0.25, -0.25, -0.25);
+  glVertex3f(-0.25, -0.25, -0.25);
+  glEnd();
+  glColor3f(0.0, 0.0, 1.0);
+  glBegin(GL_POLYGON);
+  glVertex3f(0.25, -0.25, 0.25);
+  glVertex3f(0.25, 0.25, 0.25);
+  glVertex3f(0.25, 0.25, -0.25);
+  glVertex3f(0.25, -0.25, -0.25);
+  glEnd();
+  glColor3f(1.0, 1.0, 0.0);
+  glBegin(GL_POLYGON);
+  glVertex3f(-0.25, -0.25, 0.25);
+  glVertex3f(-0.25, 0.25, 0.25);
+  glVertex3f(-0.25, 0.25, -0.25);
+  glVertex3f(-0.25, -0.25, -0.25);
+  glEnd();
+  glColor3f(1.0, 0.0, 1.0);
+  glBegin(GL_POLYGON);
+  glVertex3f(-0.25, 0.25, 0.25);
+  glVertex3f(0.25, 0.25, 0.25);
+  glVertex3f(0.25, 0.25, -0.25);
+  glVertex3f(-0.25, 0.25, -0.25);
+  glEnd();
+  glColor3f(0.0, 1.0, 1.0);
+  glBegin(GL_POLYGON);
+  glVertex3f(-0.25, -0.25, 0.25);
+  glVertex3f(0.25, -0.25, 0.25);
+  glVertex3f(0.25, -0.25, -0.25);
+  glVertex3f(-0.25, -0.25, -0.25);
+  glEnd();
 }
 
 void tronco() {
@@ -20,7 +60,7 @@ void tronco() {
 
 void bracoDireito() {
   glPushMatrix();
-  glTranslatef(0.3, 0.0, 0.4);
+  glTranslatef(0.15, 0.0, 0.0);
   glScalef(0.15, 0.15, 0.4);
   cubo();
   glPopMatrix();
@@ -28,7 +68,7 @@ void bracoDireito() {
 
 void bracoEsquerdo() {
   glPushMatrix();
-  glTranslatef(-0.3, 0.0, 0.4);
+  glTranslatef(-0.15, 0.0, 0.0);
   glScalef(0.15, 0.15, 0.4);
   cubo();
   glPopMatrix();
@@ -36,7 +76,7 @@ void bracoEsquerdo() {
 
 void pernaDireita() {
   glPushMatrix();
-  glTranslatef(0.2, 0.0, -0.4);
+  glTranslatef(0.06, 0.0, -0.25);
   glScalef(0.15, 0.15, 0.4);
   cubo();
   glPopMatrix();
@@ -44,7 +84,7 @@ void pernaDireita() {
 
 void pernaEsquerda() {
   glPushMatrix();
-  glTranslatef(-0.2, 0.0, -0.4);
+  glTranslatef(-0.06, 0.0, -0.25);
   glScalef(0.15, 0.15, 0.4);
   cubo();
   glPopMatrix();
@@ -52,162 +92,61 @@ void pernaEsquerda() {
 
 void cabeca() {
   glPushMatrix();
-  glTranslatef(0.0, 0.0, 0.8);
-  glScalef(0.3, 0.3, 0.3);
-  glutSolidSphere(1.0, 20, 20);
+  glTranslatef(0.0, 0.0, 0.2);
+  glScalef(0.25, 0.25, 0.25);
+  cubo() ;
   glPopMatrix();
 }
 
 void desenha() {
-  // Restante da função desenha permanece a mesma
-  // ...
+  glClearColor(0, 0, 0, 0);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glEnable(GL_DEPTH_TEST);
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 
-  // Criação do tronco do robô
   glPushMatrix();
+  glTranslatef(0.0, 0.0, 0.0);
   glRotatef(thetaX, 1.0, 0.0, 0.0);
   glRotatef(thetaY, 0.0, 1.0, 0.0);
   tronco();
-  glPopMatrix();
-
-  // Criação dos braços do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
   bracoDireito();
   bracoEsquerdo();
-  glPopMatrix();
-
-  // Criação das pernas do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
   pernaDireita();
   pernaEsquerda();
-  glPopMatrix();
-
-  // Criação da cabeça do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
   cabeca();
   glPopMatrix();
 
   glFlush();
 }
 
-int main(int argc, char *argv[]) {
-  // Restante da função main permanece a mesma
-  // ...
-
-  glutMainLoop();
-  return 0;
-}
-```
-
-Neste exemplo, foram adicionadas funções separadas para criar cada parte do robô, incluindo o tronco, braços direito e esquerdo, pernas direita e esquerda e a cabeça. As partes são posicionadas e dimensionadas usando as transformações apropriadas. Você pode continuar personalizando e expandindo o robô de acordo com suas necessidades.Claro! Aqui está uma versão expandida do código com funções para criar o tronco, braços direito e esquerdo, pernas direita e esquerda, e a cabeça de um robô simples. Lembre-se de que este é apenas um exemplo básico, e você pode personalizá-lo e adicionar mais detalhes conforme desejar.
-
-```c
-#include <GL/glut.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-float thetaX = 0.0;
-float thetaY = 0.0;
-
-void cubo() {
-  // Função cubo permanece a mesma
-  // ...
-}
-
-void tronco() {
-  glPushMatrix();
-  glScalef(0.4, 0.4, 0.6);
-  cubo();
-  glPopMatrix();
-}
-
-void bracoDireito() {
-  glPushMatrix();
-  glTranslatef(0.3, 0.0, 0.4);
-  glScalef(0.15, 0.15, 0.4);
-  cubo();
-  glPopMatrix();
-}
-
-void bracoEsquerdo() {
-  glPushMatrix();
-  glTranslatef(-0.3, 0.0, 0.4);
-  glScalef(0.15, 0.15, 0.4);
-  cubo();
-  glPopMatrix();
-}
-
-void pernaDireita() {
-  glPushMatrix();
-  glTranslatef(0.2, 0.0, -0.4);
-  glScalef(0.15, 0.15, 0.4);
-  cubo();
-  glPopMatrix();
-}
-
-void pernaEsquerda() {
-  glPushMatrix();
-  glTranslatef(-0.2, 0.0, -0.4);
-  glScalef(0.15, 0.15, 0.4);
-  cubo();
-  glPopMatrix();
-}
-
-void cabeca() {
-  glPushMatrix();
-  glTranslatef(0.0, 0.0, 0.8);
-  glScalef(0.3, 0.3, 0.3);
-  glutSolidSphere(1.0, 20, 20);
-  glPopMatrix();
-}
-
-void desenha() {
-  // Restante da função desenha permanece a mesma
-  // ...
-
-  // Criação do tronco do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
-  tronco();
-  glPopMatrix();
-
-  // Criação dos braços do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
-  bracoDireito();
-  bracoEsquerdo();
-  glPopMatrix();
-
-  // Criação das pernas do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
-  pernaDireita();
-  pernaEsquerda();
-  glPopMatrix();
-
-  // Criação da cabeça do robô
-  glPushMatrix();
-  glRotatef(thetaX, 1.0, 0.0, 0.0);
-  glRotatef(thetaY, 0.0, 1.0, 0.0);
-  cabeca();
-  glPopMatrix();
-
-  glFlush();
+void tecladoEspecial(int tecla, int x, int y) {
+  switch (tecla) {
+  case GLUT_KEY_RIGHT:
+    thetaY += 2;
+    break;
+  case GLUT_KEY_LEFT:
+    thetaY -= 2;
+    break;
+  case GLUT_KEY_UP:
+    thetaX += 2;
+    break;
+  case GLUT_KEY_DOWN:
+    thetaX -= 2;
+    break;
+  default:
+    break;
+  }
+  glutPostRedisplay();
 }
 
 int main(int argc, char *argv[]) {
-  // Restante da função main permanece a mesma
-  // ...
-
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+  glutInitWindowSize(400, 400);
+  glutCreateWindow("Robo");
+  glutDisplayFunc(desenha);
+  glutSpecialFunc(tecladoEspecial);
   glutMainLoop();
   return 0;
 }
