@@ -1,6 +1,3 @@
-Claro, aqui está o código completo com a implementação das rotações nos membros do robô:
-
-```c
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
@@ -144,6 +141,3 @@ int main(int argc, char *argv[]) {
   glutMainLoop();
   return 0;
 }
-```
-
-Agora o código completo inclui a implementação das rotações nos braços direito e esquerdo, bem como nas pernas esquerda e direita do robô. Você pode controlar essas rotações usando as teclas direcionais e as teclas de função, conforme explicado anteriormente.
