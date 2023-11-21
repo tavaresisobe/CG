@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-//var globais para o posicionamento do personahem e asteroid:
+//var globais para o posicionamento do personagem e asteroid:
 
 float playerX = 50.0f;
 float playerY = 50.0f;
