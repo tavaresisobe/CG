@@ -1,6 +1,3 @@
-Peço desculpas pela proporção incorreta dos braços. Vou ajustar as proporções e realocar os braços para criar um robô mais equilibrado. Aqui está uma versão revisada:
-
-```c
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
