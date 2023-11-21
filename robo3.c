@@ -150,6 +150,3 @@ int main(int argc, char *argv[]) {
   glutMainLoop();
   return 0;
 }
-```
-
-Neste código, ajustei as proporções dos braços para torná-los mais proporcionais e realoquei-os para criar um robô mais equilibrado. Espero que este código atenda às suas expectativas.
