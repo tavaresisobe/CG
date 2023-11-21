@@ -1,6 +1,3 @@
-Certamente! Aqui está a função completa com todas as partes do robô implementadas:
-
-```c
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
@@ -153,6 +150,3 @@ int main(int argc, char *argv[]) {
   glutMainLoop();
   return 0;
 }
-```
-
-Este código implementa todas as partes do robô (tronco, braços, pernas, cabeça) e permite que você use as teclas de seta para girar o robô. Certifique-se de ter configurado corretamente o ambiente de desenvolvimento OpenGL/GLUT para executar este código.
