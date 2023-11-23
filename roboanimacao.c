@@ -198,3 +198,52 @@ int main(int argc, char *argv[]) {
   glutMainLoop();
   return 0;
 }
+
+To add appropriate lighting to the arms, legs, and body of the robot, you can set material properties and modify the `init()` function. Here's the updated code:
+
+```c
+#include <GL/glut.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+float angleBracoDireito = 0.0;
+float angleBracoEsquerdo = 0.0;
+float anglePernaDireita = 0.0;
+float anglePernaEsquerda = 0.0;
+
+float thetaX = 90.00;
+float thetaY = 180.00;
+
+void init() {
+  glEnable(GL_DEPTH_TEST);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
+
+  GLfloat light_position[] = {1.0, 1.0, 1.0, 0.0};
+  GLfloat light_diffuse[] = {1.0, 1.0, 1.0, 1.0};
+  GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
+  glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+
+  glEnable(GL_COLOR_MATERIAL);
+  glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+  GLfloat material_specular[] = {1.0, 1.0, 1.0, 1.0};
+  GLfloat material_shininess[] = {50.0};
+
+  // Set material properties for arms, legs, and body
+  glMaterialfv(GL_FRONT, GL_SPECULAR, material_specular);
+  glMaterialfv(GL_FRONT, GL_SHININESS, material_shininess);
+
+  glShadeModel(GL_FLAT);
+}
+
+// ... (rest of the code)
+
+```
+
+In this modified `init()` function, I've added material properties for specular reflection and shininess. The `GL_SPECULAR` property controls the specular reflection of light, and `GL_SHININESS` controls the shininess of the material.
+
+These changes should provide more realistic lighting on the arms, legs, and body of the robot. Adjust the material properties according to your preferences for the desired appearance.
