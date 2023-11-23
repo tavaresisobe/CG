@@ -239,3 +239,100 @@ int main(int argc, char *argv[]) {
 ```
 
 This code initializes lighting, sets up a basic light source, and enables color material for shading. Keep in mind that this is a simple setup, and you might want to explore more advanced lighting techniques based on your specific requirements.
+To implement animation for the arms and legs using the 'a' and 'd' keys, you can modify the functions `bracoDireito()`, `bracoEsquerdo()`, `pernaDireita()`, and `pernaEsquerda()` to include rotation angles controlled by global variables. Here's the modified code:
+
+```c
+// Declare global variables for animation control
+float angleBracoDireito = 0.0;
+float angleBracoEsquerdo = 0.0;
+float anglePernaDireita = 0.0;
+float anglePernaEsquerda = 0.0;
+
+// ... (other functions)
+
+void bracoDireito() {
+  glPushMatrix();
+  glTranslatef(0.15, 0.0, 0.0);
+  glRotatef(angleBracoDireito, 1.0, 0.0, 0.0);  // Rotate around x-axis
+  glScalef(0.15, 0.15, 0.4);
+  cubo();
+  glPopMatrix();
+}
+
+void bracoEsquerdo() {
+  glPushMatrix();
+  glTranslatef(-0.15, 0.0, 0.0);
+  glRotatef(angleBracoEsquerdo, 1.0, 0.0, 0.0);  // Rotate around x-axis
+  glScalef(0.15, 0.15, 0.4);
+  cubo();
+  glPopMatrix();
+}
+
+void pernaDireita() {
+  glPushMatrix();
+  glTranslatef(0.06, 0.0, -0.25);
+  glRotatef(anglePernaDireita, 1.0, 0.0, 0.0);  // Rotate around x-axis
+  glScalef(0.15, 0.15, 0.4);
+  cubo();
+  glPopMatrix();
+}
+
+void pernaEsquerda() {
+  glPushMatrix();
+  glTranslatef(-0.06, 0.0, -0.25);
+  glRotatef(anglePernaEsquerda, 1.0, 0.0, 0.0);  // Rotate around x-axis
+  glScalef(0.15, 0.15, 0.4);
+  cubo();
+  glPopMatrix();
+}
+
+void tecladoEspecial(int tecla, int x, int y) {
+  switch (tecla) {
+    case GLUT_KEY_RIGHT:
+      thetaY += 2;
+      break;
+    case GLUT_KEY_LEFT:
+      thetaY -= 2;
+      break;
+    case GLUT_KEY_UP:
+      thetaX += 2;
+      break;
+    case GLUT_KEY_DOWN:
+      thetaX -= 2;
+      break;
+    default:
+      break;
+  }
+
+  glutPostRedisplay();
+}
+
+void tecladoNormal(unsigned char key, int x, int y) {
+  switch (key) {
+    case 'a':
+      // Increment the rotation angle for left arm and left leg
+      angleBracoEsquerdo += 5.0;
+      anglePernaEsquerda += 5.0;
+      break;
+    case 'd':
+      // Increment the rotation angle for right arm and right leg
+      angleBracoDireito += 5.0;
+      anglePernaDireita += 5.0;
+      break;
+    default:
+      break;
+  }
+
+  glutPostRedisplay();
+}
+
+int main(int argc, char *argv[]) {
+  // ... (other setup code)
+
+  glutKeyboardFunc(tecladoNormal);
+
+  // ... (rest of the main function)
+}
+```
+
+This code introduces new global variables to control the rotation angles of the arms and legs. The `tecladoNormal` function is added to handle the 'a' and 'd' keys and update the rotation angles accordingly. The modified arm and leg drawing functions now include rotations based on these angles.
