@@ -1,8 +1,17 @@
+/* Programa: STEVE ROBÔ ANIMADO
+   Autor: Gustavo Henrique Tavares Isobe
+   Versao: 1.0 - 09/12/2023 - 23:42h
+*/
+
+// ##################### Bibliotecas Externas ##############################
+
 #include <GL/glut.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+
+// ##################### Var Gloabais ##############################
 
 GLfloat ombrodir = 0.0 ;
 GLfloat ombroesq = 0.0 ;
@@ -17,6 +26,8 @@ GLfloat y = 0.0 ;
 GLfloat z = 0.0 ;
 GLfloat auxtransalacao = 0.0;
 GLfloat auxbracotransalacao = 0.0 ;
+
+// ########################## TAD X.h (TEXTURA) ######################################
 
 typedef struct BMPImagem
 {
@@ -50,6 +61,9 @@ bool bracoParaFrente = true;
 // Name: getBitmapImageData()
 // Desc: Simply image loader for 24 bit BMP files.
 //-----------------------------------------------------------------------------
+
+// ###################### Funcoes e Procedimentos do programa - TEXTURA ##############
+
 void getBitmapImageData( char *pFileName, BMPImage *pImage )
 {
     FILE *pFile = NULL;
@@ -94,10 +108,6 @@ void getBitmapImageData( char *pFileName, BMPImage *pImage )
     if( (i = fread(pImage->data, nTotalImagesize, 1, pFile) ) != 1 )
         printf("ERROR: getBitmapImageData - Couldn't read image data from %s.\n ", pFileName);
 
-    //
-    // Finally, rearrange BGR to RGB
-    //
-
     char charTemp;
     for( i = 0; i < nTotalImagesize; i += 3 )
     {
@@ -129,11 +139,6 @@ void CarregaTexturas()
     }
 }
 
-/* **********************************************************************
-  void initTexture(void)
-        Define a textura a ser usada
-
- ********************************************************************** */
 void initTexture (void)
 {
 
@@ -148,33 +153,7 @@ void initTexture (void)
 
 }
 
-/*void lightning(){
-    GLfloat light0_pos[] = {2.0f, 2.0f, 2.0f, 1.0f};
-    GLfloat white[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat black[] = {0.0f, 0.0f, 0.0f, 1.0f};
-
-    glLightfv(GL_LIGHT0,GL_POSITION,light0_pos);
-    glLightfv(GL_LIGHT0,GL_AMBIENT,black);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,white);
-    glLightfv(GL_LIGHT0,GL_SPECULAR,white);
-
-    //Fonte de Luz Direcional - Efeito de Holofote
-    GLfloat light1_pos[] = {4.0f, 0.0f, 0.0f, 1.0f};
-    glLightfv(GL_LIGHT1,GL_POSITION,light1_pos);
-    glLightfv(GL_LIGHT1,GL_DIFFUSE, white);
-    glLightfv(GL_LIGHT1,GL_SPECULAR, white);
-    GLfloat direction[] = {-1.0f, 0.0f, 0.0f};
-    glLightfv(GL_LIGHT1,GL_SPOT_DIRECTION,direction);
-    glLightf(GL_LIGHT1,GL_SPOT_CUTOFF,30.0f);
-    glLightf(GL_LIGHT1,GL_SPOT_EXPONENT,0.1f);
-
-    //Parâmetros definidos globalmente
-    GLfloat global_ambient[] = {0.1f, 0.1f, 0.1f, 1.0f};
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-}*/
+// ###################### Funcoes e Procedimentos do programa ##############
 
 void lightning() {
     GLfloat light0_pos[] = {2.0f, 2.0f, 2.0f, 1.0f};
@@ -212,7 +191,6 @@ void lightning() {
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
 }
-
 
 void init(void)
 {
@@ -369,7 +347,7 @@ void robo()
     cubo();
     glPopMatrix();
 
-    // Perna Inferior Esquerda
+    // Pe Esquerdo
     glBindTexture(GL_TEXTURE_2D, texture_id[0]);
     glPushMatrix();
     glTranslatef(-0.125,-0.28,-auxtransalacao + z);
@@ -389,7 +367,7 @@ void robo()
     cubo();
     glPopMatrix();
 
-    //Perna Inferior Direita
+    //Pe Direito
     glBindTexture(GL_TEXTURE_2D, texture_id[2]);
     glPushMatrix();
     glTranslatef(0.125,-0.28, auxtransalacao + z);
@@ -520,6 +498,8 @@ void rotacoes(int key, int x, int y) {
         }
     glutPostRedisplay();
 }
+
+// ############################ Principal ###################################
 
 int main(int argc, char *argv[]){
     glutInit(&argc,argv);
